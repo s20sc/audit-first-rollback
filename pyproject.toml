@@ -1,0 +1,79 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "audit-first-rollback"
+version = "0.1.0"
+description = "Reference implementation of audit-first rollback semantics for safety-critical deployment pipelines"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.11"
+authors = [
+    { name = "Xue Qin" },
+    { name = "Simin Luan" },
+    { name = "Cong Yang", email = "cong.yang@suda.edu.cn" },
+    { name = "Zhijun Li", email = "lizhijun_os@hit.edu.cn" },
+]
+keywords = [
+    "deployment-pipeline",
+    "canary",
+    "rollback",
+    "audit-chain",
+    "fault-tolerance",
+    "chaos-engineering",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: System :: Distributed Computing",
+]
+# No external runtime dependencies — intentionally stdlib-only so the
+# harness reproduces anywhere without surprises.
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "ruff>=0.6",
+    "mypy>=1.10",
+]
+
+[project.scripts]
+audit-first-chaos-grid = "scripts.run_chaos_grid:main"
+audit-first-latency    = "scripts.run_latency:main"
+audit-first-sign-check = "scripts.sign_check:main"
+
+[tool.setuptools]
+package-dir = { "" = "." }
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*", "harness*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+ignore = ["E501"]  # line length governed by formatter
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-q --tb=short"

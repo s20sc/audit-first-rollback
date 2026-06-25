@@ -1,0 +1,35 @@
+{
+  "by_posture": {
+    "audit-first": {
+      "max_ms": 392,
+      "n": 600,
+      "p50_ms": 87,
+      "p95_ms": 315,
+      "p99_ms": 328
+    },
+    "fail-open": {
+      "max_ms": 362,
+      "n": 600,
+      "p50_ms": 85,
+      "p95_ms": 317,
+      "p99_ms": 327
+    }
+  },
+  "experiment": "audit_first_rollback_latency",
+  "per_cell_median_ms": {
+    "A1": 52,
+    "A2": 156,
+    "A3": 311,
+    "A4": 157,
+    "B1": 52,
+    "B2": 52,
+    "B3": 52,
+    "B4": 52,
+    "C1": 104,
+    "C2": 310,
+    "C3": 313,
+    "C4": 52
+  },
+  "slo_p95_ms": 500,
+  "slo_pass": true
+}

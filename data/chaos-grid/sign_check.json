@@ -1,0 +1,27 @@
+{
+  "checks": {
+    "H1_audit_first_all_cells_consistent": {
+      "failures": [],
+      "passed": true
+    },
+    "H2_fail_open_class_B_consistent": {
+      "failures": [],
+      "passed": true
+    },
+    "H3_fail_open_class_A_C_inconsistent": {
+      "failures": [],
+      "passed": true
+    },
+    "H4_audit_first_p95_within_500ms": {
+      "failures": [],
+      "passed": true
+    }
+  },
+  "measurements": {
+    "audit_first_consistent_rate": 1.0,
+    "audit_first_wall_clock_p50_ms": 87,
+    "audit_first_wall_clock_p95_ms": 315,
+    "fail_open_consistent_rate": 0.3333
+  },
+  "verdict": "PASS"
+}

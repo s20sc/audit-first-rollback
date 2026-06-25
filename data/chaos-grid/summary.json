@@ -1,0 +1,249 @@
+{
+  "by_cell": {
+    "A1__audit-first": {
+      "ci95_wilson": [
+        0.9286,
+        1.0
+      ],
+      "consistent": 50,
+      "n": 50,
+      "rate": 1.0
+    },
+    "A1__fail-open": {
+      "ci95_wilson": [
+        0.0,
+        0.0714
+      ],
+      "consistent": 0,
+      "n": 50,
+      "rate": 0.0
+    },
+    "A2__audit-first": {
+      "ci95_wilson": [
+        0.9286,
+        1.0
+      ],
+      "consistent": 50,
+      "n": 50,
+      "rate": 1.0
+    },
+    "A2__fail-open": {
+      "ci95_wilson": [
+        0.0,
+        0.0714
+      ],
+      "consistent": 0,
+      "n": 50,
+      "rate": 0.0
+    },
+    "A3__audit-first": {
+      "ci95_wilson": [
+        0.9286,
+        1.0
+      ],
+      "consistent": 50,
+      "n": 50,
+      "rate": 1.0
+    },
+    "A3__fail-open": {
+      "ci95_wilson": [
+        0.0,
+        0.0714
+      ],
+      "consistent": 0,
+      "n": 50,
+      "rate": 0.0
+    },
+    "A4__audit-first": {
+      "ci95_wilson": [
+        0.9286,
+        1.0
+      ],
+      "consistent": 50,
+      "n": 50,
+      "rate": 1.0
+    },
+    "A4__fail-open": {
+      "ci95_wilson": [
+        0.0,
+        0.0714
+      ],
+      "consistent": 0,
+      "n": 50,
+      "rate": 0.0
+    },
+    "B1__audit-first": {
+      "ci95_wilson": [
+        0.9286,
+        1.0
+      ],
+      "consistent": 50,
+      "n": 50,
+      "rate": 1.0
+    },
+    "B1__fail-open": {
+      "ci95_wilson": [
+        0.9286,
+        1.0
+      ],
+      "consistent": 50,
+      "n": 50,
+      "rate": 1.0
+    },
+    "B2__audit-first": {
+      "ci95_wilson": [
+        0.9286,
+        1.0
+      ],
+      "consistent": 50,
+      "n": 50,
+      "rate": 1.0
+    },
+    "B2__fail-open": {
+      "ci95_wilson": [
+        0.9286,
+        1.0
+      ],
+      "consistent": 50,
+      "n": 50,
+      "rate": 1.0
+    },
+    "B3__audit-first": {
+      "ci95_wilson": [
+        0.9286,
+        1.0
+      ],
+      "consistent": 50,
+      "n": 50,
+      "rate": 1.0
+    },
+    "B3__fail-open": {
+      "ci95_wilson": [
+        0.9286,
+        1.0
+      ],
+      "consistent": 50,
+      "n": 50,
+      "rate": 1.0
+    },
+    "B4__audit-first": {
+      "ci95_wilson": [
+        0.9286,
+        1.0
+      ],
+      "consistent": 50,
+      "n": 50,
+      "rate": 1.0
+    },
+    "B4__fail-open": {
+      "ci95_wilson": [
+        0.9286,
+        1.0
+      ],
+      "consistent": 50,
+      "n": 50,
+      "rate": 1.0
+    },
+    "C1__audit-first": {
+      "ci95_wilson": [
+        0.9286,
+        1.0
+      ],
+      "consistent": 50,
+      "n": 50,
+      "rate": 1.0
+    },
+    "C1__fail-open": {
+      "ci95_wilson": [
+        0.0,
+        0.0714
+      ],
+      "consistent": 0,
+      "n": 50,
+      "rate": 0.0
+    },
+    "C2__audit-first": {
+      "ci95_wilson": [
+        0.9286,
+        1.0
+      ],
+      "consistent": 50,
+      "n": 50,
+      "rate": 1.0
+    },
+    "C2__fail-open": {
+      "ci95_wilson": [
+        0.0,
+        0.0714
+      ],
+      "consistent": 0,
+      "n": 50,
+      "rate": 0.0
+    },
+    "C3__audit-first": {
+      "ci95_wilson": [
+        0.9286,
+        1.0
+      ],
+      "consistent": 50,
+      "n": 50,
+      "rate": 1.0
+    },
+    "C3__fail-open": {
+      "ci95_wilson": [
+        0.0,
+        0.0714
+      ],
+      "consistent": 0,
+      "n": 50,
+      "rate": 0.0
+    },
+    "C4__audit-first": {
+      "ci95_wilson": [
+        0.9286,
+        1.0
+      ],
+      "consistent": 50,
+      "n": 50,
+      "rate": 1.0
+    },
+    "C4__fail-open": {
+      "ci95_wilson": [
+        0.0,
+        0.0714
+      ],
+      "consistent": 0,
+      "n": 50,
+      "rate": 0.0
+    }
+  },
+  "by_posture": {
+    "audit-first": {
+      "ci95_wilson": [
+        0.9936,
+        1.0
+      ],
+      "consistent_count": 600,
+      "consistent_rate": 1.0,
+      "n_trials": 600,
+      "wall_clock_p50_ms": 87,
+      "wall_clock_p95_ms": 315
+    },
+    "fail-open": {
+      "ci95_wilson": [
+        0.2968,
+        0.372
+      ],
+      "consistent_count": 200,
+      "consistent_rate": 0.3333,
+      "n_trials": 600,
+      "wall_clock_p50_ms": 85,
+      "wall_clock_p95_ms": 317
+    }
+  },
+  "experiment": "audit_first_rollback_chaos_grid",
+  "n_cells": 12,
+  "n_total_trials": 1200,
+  "n_trials_per_cell": 50,
+  "seed": 112026
+}
