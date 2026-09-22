@@ -1,0 +1,2054 @@
+{
+ "exploratory": false,
+ "x1": {
+  "sites": {
+   "S00": {
+    "desc": "no fault",
+    "region": "no fault",
+    "site_kind": "none",
+    "flagged": false,
+    "expected": [
+     "promoted/to"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 0,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "promoted/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 0,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "promoted/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 0,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "promoted/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 0,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "promoted/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S01": {
+    "desc": "VALIDATING status write",
+    "region": "pre-flip",
+    "site_kind": "store_nth",
+    "flagged": false,
+    "expected": [
+     "failed/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S02": {
+    "desc": "SHADOW_RUNNING status write",
+    "region": "pre-flip",
+    "site_kind": "store_nth",
+    "flagged": false,
+    "expected": [
+     "failed/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S03": {
+    "desc": "shadow summary write",
+    "region": "pre-flip",
+    "site_kind": "store_nth",
+    "flagged": false,
+    "expected": [
+     "failed/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S04": {
+    "desc": "SHADOW_PASSED status write",
+    "region": "pre-flip",
+    "site_kind": "store_nth",
+    "flagged": false,
+    "expected": [
+     "failed/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S05": {
+    "desc": "upgrade audit mirror (after live flip)",
+    "region": "flip boundary",
+    "site_kind": "mirror",
+    "flagged": false,
+    "expected": [
+     "rolled_back/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S06": {
+    "desc": "CANARY_RUNNING status write",
+    "region": "flip boundary",
+    "site_kind": "store_nth",
+    "flagged": false,
+    "expected": [
+     "rolled_back/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S07": {
+    "desc": "canary poll-1 status write",
+    "region": "provisional",
+    "site_kind": "store_nth",
+    "flagged": false,
+    "expected": [
+     "rolled_back/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S08": {
+    "desc": "canary poll-2 status write",
+    "region": "provisional",
+    "site_kind": "store_nth",
+    "flagged": false,
+    "expected": [
+     "rolled_back/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S09": {
+    "desc": "canary poll-3 status write",
+    "region": "provisional",
+    "site_kind": "store_nth",
+    "flagged": false,
+    "expected": [
+     "rolled_back/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S10": {
+    "desc": "canary poll-4 status write",
+    "region": "provisional",
+    "site_kind": "store_nth",
+    "flagged": false,
+    "expected": [
+     "rolled_back/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S11": {
+    "desc": "canary poll-5 status write",
+    "region": "provisional",
+    "site_kind": "store_nth",
+    "flagged": false,
+    "expected": [
+     "rolled_back/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S12": {
+    "desc": "canary poll-6 status write",
+    "region": "provisional",
+    "site_kind": "store_nth",
+    "flagged": false,
+    "expected": [
+     "rolled_back/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S13": {
+    "desc": "end-of-window summary write",
+    "region": "provisional",
+    "site_kind": "store_nth",
+    "flagged": false,
+    "expected": [
+     "rolled_back/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S14": {
+    "desc": "CANARY_PROMOTED status write",
+    "region": "provisional",
+    "site_kind": "store_status",
+    "flagged": false,
+    "expected": [
+     "rolled_back/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S15": {
+    "desc": "PROMOTED status write",
+    "region": "provisional",
+    "site_kind": "store_status",
+    "flagged": false,
+    "expected": [
+     "rolled_back/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S16a": {
+    "desc": "metric provider raises at poll 1",
+    "region": "provisional",
+    "site_kind": "metric_k",
+    "flagged": false,
+    "expected": [
+     "rolled_back/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S16b": {
+    "desc": "metric provider raises at poll 3",
+    "region": "provisional",
+    "site_kind": "metric_k",
+    "flagged": false,
+    "expected": [
+     "rolled_back/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S16c": {
+    "desc": "metric provider raises at final poll",
+    "region": "provisional",
+    "site_kind": "metric_k",
+    "flagged": false,
+    "expected": [
+     "rolled_back/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S17": {
+    "desc": "post-poll success-rate compute raises",
+    "region": "provisional",
+    "site_kind": "compute_k",
+    "flagged": false,
+    "expected": [
+     "rolled_back/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "rolled_back/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S18": {
+    "desc": "rollback closure raises before revert",
+    "region": "rollback path",
+    "site_kind": "rb_closure",
+    "flagged": true,
+    "expected": [
+     "failed/to"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S19": {
+    "desc": "rollback audit mirror raises after revert",
+    "region": "rollback path",
+    "site_kind": "rb_mirror",
+    "flagged": true,
+    "expected": [
+     "failed/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S20": {
+    "desc": "ROLLED_BACK status write raises",
+    "region": "rollback path",
+    "site_kind": "rb_status",
+    "flagged": false,
+    "expected": [
+     "failed/from"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/from"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 0,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   },
+   "S21": {
+    "desc": "flagged FAILED status write raises after the closure raised",
+    "region": "rollback path",
+    "site_kind": "rb_flagged_status",
+    "flagged": true,
+    "expected": [
+     "failed/to"
+    ],
+    "base|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "base|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|audit-first": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 50,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    },
+    "guard-fix|fail-open": {
+     "n": 50,
+     "fired": 50,
+     "spec": 50,
+     "strict": 0,
+     "observed": [
+      "failed/to"
+     ],
+     "distinct_outcomes": 1
+    }
+   }
+  },
+  "totals": {
+   "base|audit-first": {
+    "n": 1200,
+    "spec": 1100,
+    "strict": 1050,
+    "sites_with_mixed_outcomes": 0
+   },
+   "base|fail-open": {
+    "n": 1200,
+    "spec": 350,
+    "strict": 250,
+    "sites_with_mixed_outcomes": 0
+   },
+   "guard-fix|audit-first": {
+    "n": 1200,
+    "spec": 1200,
+    "strict": 1200,
+    "sites_with_mixed_outcomes": 0
+   },
+   "guard-fix|fail-open": {
+    "n": 1200,
+    "spec": 350,
+    "strict": 250,
+    "sites_with_mixed_outcomes": 0
+   }
+  },
+  "latency": {
+   "base": {
+    "fault_to_rolled_back_ms": {
+     "n": 650,
+     "p50": 26.158,
+     "p95": 27.505,
+     "p99": 35.761,
+     "max": 57.296,
+     "mean": 24.62353076923077,
+     "sites": 13,
+     "p50_ci": [
+      25.724,
+      26.412
+     ],
+     "p99_ci": [
+      35.126,
+      37.018
+     ]
+    },
+    "fault_to_any_terminal_ms": {
+     "n": 1150,
+     "p50": 18.305,
+     "p95": 27.125,
+     "p99": 35.315,
+     "max": 57.296,
+     "mean": 15.336046086956523
+    },
+    "soak_overshoot_ms": {
+     "n": 50,
+     "p50": 20.19399999999999,
+     "p95": 20.730999999999998,
+     "p99": 21.322000000000006,
+     "max": 21.322000000000006,
+     "mean": 20.19624000000001
+    }
+   },
+   "guard-fix": {
+    "fault_to_rolled_back_ms": {
+     "n": 750,
+     "p50": 26.359,
+     "p95": 29.518,
+     "p99": 35.657,
+     "max": 40.392,
+     "mean": 24.20098666666667,
+     "sites": 15,
+     "p50_ci": [
+      18.704,
+      26.632
+     ],
+     "p99_ci": [
+      31.634,
+      36.055
+     ]
+    },
+    "fault_to_any_terminal_ms": {
+     "n": 1150,
+     "p50": 18.676,
+     "p95": 28.817,
+     "p99": 34.815,
+     "max": 40.392,
+     "mean": 17.16749043478261
+    },
+    "soak_overshoot_ms": {
+     "n": 50,
+     "p50": 20.394000000000023,
+     "p95": 20.863999999999994,
+     "p99": 20.925000000000026,
+     "max": 20.925000000000026,
+     "mean": 20.34918000000001
+    }
+   }
+  }
+ },
+ "x2": {
+  "base": {
+   "runs": 10,
+   "per_run": [
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    },
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    },
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    },
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    },
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    },
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    },
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    },
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    },
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    },
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    }
+   ],
+   "cells": {
+    "A1|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 98
+    },
+    "A1|fail-open": {
+     "n": 500,
+     "spec": 0,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 84
+    },
+    "A2|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 209
+    },
+    "A2|fail-open": {
+     "n": 500,
+     "spec": 0,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 180
+    },
+    "A3|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 365
+    },
+    "A3|fail-open": {
+     "n": 500,
+     "spec": 0,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 334
+    },
+    "A4|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 215
+    },
+    "A4|fail-open": {
+     "n": 500,
+     "spec": 0,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 179
+    },
+    "B1|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 78
+    },
+    "B1|fail-open": {
+     "n": 500,
+     "spec": 500,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 77
+    },
+    "B2|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 80
+    },
+    "B2|fail-open": {
+     "n": 500,
+     "spec": 500,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 77
+    },
+    "B3|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 79
+    },
+    "B3|fail-open": {
+     "n": 500,
+     "spec": 500,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 79
+    },
+    "B4|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 88
+    },
+    "B4|fail-open": {
+     "n": 500,
+     "spec": 500,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 78
+    },
+    "C1|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 99
+    },
+    "C1|fail-open": {
+     "n": 500,
+     "spec": 0,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 80
+    },
+    "C2|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 368
+    },
+    "C2|fail-open": {
+     "n": 500,
+     "spec": 0,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 332
+    },
+    "C3|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 100
+    },
+    "C3|fail-open": {
+     "n": 500,
+     "spec": 0,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 78
+    },
+    "C4|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 130
+    },
+    "C4|fail-open": {
+     "n": 500,
+     "spec": 0,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 104
+    }
+   },
+   "latency|audit-first": {
+    "n": 6000,
+    "p50": 97,
+    "p95": 358,
+    "p99": 366,
+    "max": 433,
+    "mean": 154.10666666666665,
+    "p50_ci": [
+     97,
+     98
+    ],
+    "p95_ci": [
+     357,
+     358
+    ],
+    "p95_per_run_range": [
+     357,
+     358
+    ],
+    "cell_p95_min": 78,
+    "cell_p95_max": 368,
+    "cells_over_500ms_p95": 0
+   },
+   "latency|fail-open": {
+    "n": 6000,
+    "p50": 77,
+    "p95": 330,
+    "p99": 331,
+    "max": 358,
+    "mean": 137.80633333333333,
+    "p50_ci": [
+     77,
+     77
+    ],
+    "p95_ci": [
+     330,
+     330
+    ],
+    "p95_per_run_range": [
+     330,
+     330
+    ],
+    "cell_p95_min": 77,
+    "cell_p95_max": 334,
+    "cells_over_500ms_p95": 0
+   }
+  },
+  "guard-fix": {
+   "runs": 10,
+   "per_run": [
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    },
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    },
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    },
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    },
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    },
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    },
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    },
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    },
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    },
+    {
+     "audit-first": {
+      "n": 600,
+      "spec": 600,
+      "strict": 600
+     },
+     "fail-open": {
+      "n": 600,
+      "spec": 200,
+      "strict": 0
+     }
+    }
+   ],
+   "cells": {
+    "A1|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 90
+    },
+    "A1|fail-open": {
+     "n": 500,
+     "spec": 0,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 78
+    },
+    "A2|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 200
+    },
+    "A2|fail-open": {
+     "n": 500,
+     "spec": 0,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 175
+    },
+    "A3|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 356
+    },
+    "A3|fail-open": {
+     "n": 500,
+     "spec": 0,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 327
+    },
+    "A4|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 207
+    },
+    "A4|fail-open": {
+     "n": 500,
+     "spec": 0,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 173
+    },
+    "B1|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 72
+    },
+    "B1|fail-open": {
+     "n": 500,
+     "spec": 500,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 77
+    },
+    "B2|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 73
+    },
+    "B2|fail-open": {
+     "n": 500,
+     "spec": 500,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 77
+    },
+    "B3|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 72
+    },
+    "B3|fail-open": {
+     "n": 500,
+     "spec": 500,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 77
+    },
+    "B4|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 79
+    },
+    "B4|fail-open": {
+     "n": 500,
+     "spec": 500,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 77
+    },
+    "C1|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 92
+    },
+    "C1|fail-open": {
+     "n": 500,
+     "spec": 0,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 77
+    },
+    "C2|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 357
+    },
+    "C2|fail-open": {
+     "n": 500,
+     "spec": 0,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 330
+    },
+    "C3|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 95
+    },
+    "C3|fail-open": {
+     "n": 500,
+     "spec": 0,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 77
+    },
+    "C4|audit-first": {
+     "n": 500,
+     "spec": 500,
+     "strict": 500,
+     "distinct_outcomes": 1,
+     "p95_ms": 116
+    },
+    "C4|fail-open": {
+     "n": 500,
+     "spec": 0,
+     "strict": 0,
+     "distinct_outcomes": 1,
+     "p95_ms": 101
+    }
+   },
+   "latency|audit-first": {
+    "n": 6000,
+    "p50": 88,
+    "p95": 349,
+    "p99": 356,
+    "max": 381,
+    "mean": 145.65583333333333,
+    "p50_ci": [
+     88,
+     89
+    ],
+    "p95_ci": [
+     348,
+     350
+    ],
+    "p95_per_run_range": [
+     348,
+     353
+    ],
+    "cell_p95_min": 72,
+    "cell_p95_max": 357,
+    "cells_over_500ms_p95": 0
+   },
+   "latency|fail-open": {
+    "n": 6000,
+    "p50": 73,
+    "p95": 322,
+    "p99": 330,
+    "max": 351,
+    "mean": 131.38733333333334,
+    "p50_ci": [
+     71,
+     77
+    ],
+    "p95_ci": [
+     322,
+     323
+    ],
+    "p95_per_run_range": [
+     322,
+     330
+    ],
+    "cell_p95_min": 77,
+    "cell_p95_max": 330,
+    "cells_over_500ms_p95": 0
+   }
+  }
+ },
+ "x3": {
+  "runs": 5,
+  "per_run": [
+   {
+    "audit-first": {
+     "n": 600,
+     "spec": 600,
+     "strict": 600
+    },
+    "fail-open": {
+     "n": 600,
+     "spec": 200,
+     "strict": 0
+    }
+   },
+   {
+    "audit-first": {
+     "n": 600,
+     "spec": 600,
+     "strict": 600
+    },
+    "fail-open": {
+     "n": 600,
+     "spec": 200,
+     "strict": 0
+    }
+   },
+   {
+    "audit-first": {
+     "n": 600,
+     "spec": 600,
+     "strict": 600
+    },
+    "fail-open": {
+     "n": 600,
+     "spec": 200,
+     "strict": 0
+    }
+   },
+   {
+    "audit-first": {
+     "n": 600,
+     "spec": 600,
+     "strict": 600
+    },
+    "fail-open": {
+     "n": 600,
+     "spec": 200,
+     "strict": 0
+    }
+   },
+   {
+    "audit-first": {
+     "n": 600,
+     "spec": 600,
+     "strict": 600
+    },
+    "fail-open": {
+     "n": 600,
+     "spec": 200,
+     "strict": 0
+    }
+   }
+  ],
+  "latency|audit-first": {
+   "n": 3000,
+   "p50": 99,
+   "p95": 359,
+   "p99": 363,
+   "max": 380,
+   "mean": 155.79333333333332,
+   "p95_ci": [
+    359,
+    360
+   ]
+  },
+  "latency|fail-open": {
+   "n": 3000,
+   "p50": 76,
+   "p95": 329,
+   "p99": 330,
+   "max": 357,
+   "mean": 136.66533333333334,
+   "p95_ci": [
+    328,
+    329
+   ]
+  }
+ }
+}

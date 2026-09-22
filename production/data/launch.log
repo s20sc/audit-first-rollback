@@ -1,0 +1,39 @@
+[2026-09-22 10:38:58] sweep base audit-first
+{"posture": "audit-first", "n": 1200, "coherent": 1100, "output": "$ROOT/runs3/X1_sites/base/audit-first.jsonl"}
+[2026-09-22 10:42:43] sweep base fail-open
+{"posture": "fail-open", "n": 1200, "coherent": 350, "output": "$ROOT/runs3/X1_sites/base/fail-open.jsonl"}
+[2026-09-22 10:46:28] sweep guard-fix audit-first
+{"posture": "audit-first", "n": 1200, "coherent": 1200, "output": "$ROOT/runs3/X1_sites/guard-fix/audit-first.jsonl"}
+[2026-09-22 10:50:13] sweep guard-fix fail-open
+{"posture": "fail-open", "n": 1200, "coherent": 350, "output": "$ROOT/runs3/X1_sites/guard-fix/fail-open.jsonl"}
+[2026-09-22 10:53:58] grid guard-fix rep1 seed=112027
+{"audit_first_consistent_rate": 1.0, "audit_first_rollback_path_p50_ms": 89, "audit_first_rollback_path_p95_ms": 353, "audit_first_wall_clock_p50_ms": 89, "audit_first_wall_clock_p95_ms": 353, "fail_open_consistent_rate": 0.3333, "n_total_trials": 1200, "n_trials_per_cell": 50, "note": "all four hypotheses (H1..H4) hold", "verdict": "PASS", "wall_clock_seconds_total": 209.67}
+[2026-09-22 10:57:28] grid guard-fix rep2 seed=112028
+{"audit_first_consistent_rate": 1.0, "audit_first_rollback_path_p50_ms": 88, "audit_first_rollback_path_p95_ms": 348, "audit_first_wall_clock_p50_ms": 88, "audit_first_wall_clock_p95_ms": 348, "fail_open_consistent_rate": 0.3333, "n_total_trials": 1200, "n_trials_per_cell": 50, "note": "all four hypotheses (H1..H4) hold", "verdict": "PASS", "wall_clock_seconds_total": 208.18}
+[2026-09-22 11:00:57] grid guard-fix rep3 seed=112029
+{"audit_first_consistent_rate": 1.0, "audit_first_rollback_path_p50_ms": 88, "audit_first_rollback_path_p95_ms": 348, "audit_first_wall_clock_p50_ms": 88, "audit_first_wall_clock_p95_ms": 348, "fail_open_consistent_rate": 0.3333, "n_total_trials": 1200, "n_trials_per_cell": 50, "note": "all four hypotheses (H1..H4) hold", "verdict": "PASS", "wall_clock_seconds_total": 208.0}
+[2026-09-22 11:04:25] grid guard-fix rep4 seed=112030
+{"audit_first_consistent_rate": 1.0, "audit_first_rollback_path_p50_ms": 88, "audit_first_rollback_path_p95_ms": 349, "audit_first_wall_clock_p50_ms": 88, "audit_first_wall_clock_p95_ms": 349, "fail_open_consistent_rate": 0.3333, "n_total_trials": 1200, "n_trials_per_cell": 50, "note": "all four hypotheses (H1..H4) hold", "verdict": "PASS", "wall_clock_seconds_total": 208.54}
+[2026-09-22 11:07:53] grid guard-fix rep5 seed=112031
+{"audit_first_consistent_rate": 1.0, "audit_first_rollback_path_p50_ms": 89, "audit_first_rollback_path_p95_ms": 348, "audit_first_wall_clock_p50_ms": 89, "audit_first_wall_clock_p95_ms": 348, "fail_open_consistent_rate": 0.3333, "n_total_trials": 1200, "n_trials_per_cell": 50, "note": "all four hypotheses (H1..H4) hold", "verdict": "PASS", "wall_clock_seconds_total": 209.0}
+[2026-09-22 11:11:23] grid guard-fix rep6 seed=112032
+{"audit_first_consistent_rate": 1.0, "audit_first_rollback_path_p50_ms": 88, "audit_first_rollback_path_p95_ms": 349, "audit_first_wall_clock_p50_ms": 88, "audit_first_wall_clock_p95_ms": 349, "fail_open_consistent_rate": 0.3333, "n_total_trials": 1200, "n_trials_per_cell": 50, "note": "all four hypotheses (H1..H4) hold", "verdict": "PASS", "wall_clock_seconds_total": 208.26}
+[2026-09-22 11:14:51] grid guard-fix rep7 seed=112033
+{"audit_first_consistent_rate": 1.0, "audit_first_rollback_path_p50_ms": 88, "audit_first_rollback_path_p95_ms": 348, "audit_first_wall_clock_p50_ms": 88, "audit_first_wall_clock_p95_ms": 348, "fail_open_consistent_rate": 0.3333, "n_total_trials": 1200, "n_trials_per_cell": 50, "note": "all four hypotheses (H1..H4) hold", "verdict": "PASS", "wall_clock_seconds_total": 208.57}
+[2026-09-22 11:18:20] grid guard-fix rep8 seed=112034
+{"audit_first_consistent_rate": 1.0, "audit_first_rollback_path_p50_ms": 89, "audit_first_rollback_path_p95_ms": 349, "audit_first_wall_clock_p50_ms": 89, "audit_first_wall_clock_p95_ms": 349, "fail_open_consistent_rate": 0.3333, "n_total_trials": 1200, "n_trials_per_cell": 50, "note": "all four hypotheses (H1..H4) hold", "verdict": "PASS", "wall_clock_seconds_total": 208.59}
+[2026-09-22 11:21:49] grid guard-fix rep9 seed=112035
+{"audit_first_consistent_rate": 1.0, "audit_first_rollback_path_p50_ms": 88, "audit_first_rollback_path_p95_ms": 350, "audit_first_wall_clock_p50_ms": 88, "audit_first_wall_clock_p95_ms": 350, "fail_open_consistent_rate": 0.3333, "n_total_trials": 1200, "n_trials_per_cell": 50, "note": "all four hypotheses (H1..H4) hold", "verdict": "PASS", "wall_clock_seconds_total": 208.29}
+[2026-09-22 11:25:17] grid guard-fix rep10 seed=112036
+{"audit_first_consistent_rate": 1.0, "audit_first_rollback_path_p50_ms": 89, "audit_first_rollback_path_p95_ms": 348, "audit_first_wall_clock_p50_ms": 89, "audit_first_wall_clock_p95_ms": 348, "fail_open_consistent_rate": 0.3333, "n_total_trials": 1200, "n_trials_per_cell": 50, "note": "all four hypotheses (H1..H4) hold", "verdict": "PASS", "wall_clock_seconds_total": 215.24}
+[2026-09-22 11:28:52] reversed rep1 seed=112037
+{"audit_first_consistent_rate": 1.0, "audit_first_rollback_path_p50_ms": 99, "audit_first_rollback_path_p95_ms": 359, "audit_first_wall_clock_p50_ms": 99, "audit_first_wall_clock_p95_ms": 359, "fail_open_consistent_rate": 0.3333, "n_total_trials": 1200, "n_trials_per_cell": 50, "note": "all four hypotheses (H1..H4) hold", "verdict": "PASS", "wall_clock_seconds_total": 228.28}
+[2026-09-22 11:32:41] reversed rep2 seed=112038
+{"audit_first_consistent_rate": 1.0, "audit_first_rollback_path_p50_ms": 99, "audit_first_rollback_path_p95_ms": 359, "audit_first_wall_clock_p50_ms": 99, "audit_first_wall_clock_p95_ms": 359, "fail_open_consistent_rate": 0.3333, "n_total_trials": 1200, "n_trials_per_cell": 50, "note": "all four hypotheses (H1..H4) hold", "verdict": "PASS", "wall_clock_seconds_total": 227.86}
+[2026-09-22 11:36:29] reversed rep3 seed=112039
+{"audit_first_consistent_rate": 1.0, "audit_first_rollback_path_p50_ms": 99, "audit_first_rollback_path_p95_ms": 359, "audit_first_wall_clock_p50_ms": 99, "audit_first_wall_clock_p95_ms": 359, "fail_open_consistent_rate": 0.3333, "n_total_trials": 1200, "n_trials_per_cell": 50, "note": "all four hypotheses (H1..H4) hold", "verdict": "PASS", "wall_clock_seconds_total": 228.68}
+[2026-09-22 11:40:18] reversed rep4 seed=112040
+{"audit_first_consistent_rate": 1.0, "audit_first_rollback_path_p50_ms": 99, "audit_first_rollback_path_p95_ms": 360, "audit_first_wall_clock_p50_ms": 99, "audit_first_wall_clock_p95_ms": 360, "fail_open_consistent_rate": 0.3333, "n_total_trials": 1200, "n_trials_per_cell": 50, "note": "all four hypotheses (H1..H4) hold", "verdict": "PASS", "wall_clock_seconds_total": 228.1}
+[2026-09-22 11:44:06] reversed rep5 seed=112041
+{"audit_first_consistent_rate": 1.0, "audit_first_rollback_path_p50_ms": 100, "audit_first_rollback_path_p95_ms": 359, "audit_first_wall_clock_p50_ms": 100, "audit_first_wall_clock_p95_ms": 359, "fail_open_consistent_rate": 0.3333, "n_total_trials": 1200, "n_trials_per_cell": 50, "note": "all four hypotheses (H1..H4) hold", "verdict": "PASS", "wall_clock_seconds_total": 228.14}
+[2026-09-22 11:47:54] ALL DONE

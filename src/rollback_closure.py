@@ -14,8 +14,8 @@ behaviour predictable (no surprise external dependencies).
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Callable
 
 
 @dataclass(frozen=True)
@@ -59,7 +59,8 @@ class RollbackClosure:
 
         self._snapshot = snapshot
         self._revert_fn = revert_fn
-        self._has_run = False
+        self._completed = False
+        self._attempts = 0
 
     @property
     def snapshot(self) -> Snapshot:
@@ -67,22 +68,29 @@ class RollbackClosure:
 
     @property
     def has_run(self) -> bool:
-        return self._has_run
+        """True once a revert has completed without raising."""
+        return self._completed
+
+    @property
+    def attempts(self) -> int:
+        """How many times the revert function has been called."""
+        return self._attempts
 
     def run(self) -> None:
         """Invoke the bound revert function with the captured snapshot.
 
-        Idempotent on repeat invocations: a second :meth:`run` call
-        becomes a no-op. This is defensive — the audit-first guard
-        only calls ``run`` once per exception, but a crash between the
-        rollback call and the store update could see the same closure
-        re-attached and re-run on restart.
+        A revert that returned is not repeated: a second :meth:`run` call
+        after success is a no-op, so re-attaching the closure on restart
+        cannot undo a later state. A revert that *raised* leaves the
+        closure armed, because the restoration did not happen and the
+        caller may retry it; ``attempts`` counts the calls that ran.
         """
 
-        if self._has_run:
+        if self._completed:
             return
-        self._has_run = True
+        self._attempts += 1
         self._revert_fn(self._snapshot)
+        self._completed = True
 
 
 def make_rollback_closure(

@@ -1,15 +1,20 @@
-"""Per-capability locked job store.
+"""Job records and per-capability locks.
 
-The store mediates concurrent upgrades to the same capability. Two
-concurrent canary jobs that affect overlapping capabilities must
-serialise: while job A holds the lock for capability ``c``, job B
-either waits for A's terminal state or is rejected.
+The store holds one mutable :class:`Job` record per deployment job and
+hands out one ``asyncio.Lock`` per capability. It does not serialise jobs
+by itself: the runner (:func:`audit_first.run_audit_first`) takes the
+capability's lock before the provisional flip and releases it after the
+terminal record, so two jobs on the same capability cannot interleave, and
+a second request that arrives while the lock is held is rejected with
+:class:`audit_first.CapabilityBusy`. Field updates in :meth:`JobStore.update`
+contain no ``await`` and are therefore atomic under asyncio; they take no
+lock, so the runner can call them while it holds the capability lock.
 
-This module provides an in-memory :class:`JobStore` with explicit
-per-capability ``asyncio.Lock``s and a ``Job`` data record. A
-production runtime backs the same interface against a durable
-journal; the harness substitutes this in-memory variant so that the
-chaos-grid runs in a single Python process.
+A production runtime may back the same interface against a durable
+journal and take the same per-capability lock around the whole job. The
+runtime evaluated in the paper keeps its job records in memory; the harness
+uses this in-memory variant so that the chaos grid runs in a single Python
+process.
 """
 
 from __future__ import annotations
@@ -41,7 +46,7 @@ class Job:
 
 
 class JobStore:
-    """In-memory job store with per-capability locks."""
+    """In-memory job store; per-capability locks are held by the runner."""
 
     def __init__(self) -> None:
         self._jobs: dict[str, Job] = {}
@@ -65,22 +70,22 @@ class JobStore:
         error: str | None = None,
         rollback_reason: str | None = None,
     ) -> Job:
-        """Apply terminal-state mutations atomically inside the
-        per-capability lock.
+        """Apply a status mutation to the job record.
 
-        Called by the audit-first guard on both the success path
-        (``status=PROMOTED``) and the rollback paths (``ROLLED_BACK``
-        or ``FAILED``).
+        Called by the guard on the success path (``status=PROMOTED``) and
+        on the rollback paths (``ROLLED_BACK`` or ``FAILED``). The update
+        has no suspension point, so it is atomic under asyncio, and it
+        takes no lock: the caller already holds the capability lock for
+        the whole job (see :func:`audit_first.run_audit_first`).
         """
 
         job = self._jobs[job_id]
-        async with self.lock_for(job.capability):
-            if status is not None:
-                job.status = status
-            if error is not None:
-                job.error = error
-            if rollback_reason is not None:
-                job.rollback_reason = rollback_reason
+        if status is not None:
+            job.status = status
+        if error is not None:
+            job.error = error
+        if rollback_reason is not None:
+            job.rollback_reason = rollback_reason
         return job
 
     async def fetch_or_raise(self, job_id: str) -> Job:

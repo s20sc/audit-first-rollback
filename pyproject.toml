@@ -57,11 +57,14 @@ package-dir = { "" = "." }
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["src*", "harness*"]
+include = ["src*", "harness*", "scripts*"]
 
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+# production/harness/ holds the exact files that drove the production runtime
+# (checksums in production/MANIFEST.sha256); they are not reformatted.
+extend-exclude = ["production/harness", "out"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "SIM"]

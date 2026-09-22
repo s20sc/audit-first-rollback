@@ -25,8 +25,7 @@ env/
 *.swo
 .DS_Store
 
-# Re-running the harness overwrites the committed reference data in
-# place; the committed seed reproduces it.
+# Fresh runs of the harness (the committed reference run is in data/)
+out/
 
 # Tooling session logs
-.claude/

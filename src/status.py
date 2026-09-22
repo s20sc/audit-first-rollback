@@ -11,7 +11,7 @@ from __future__ import annotations
 from enum import Enum
 
 
-class JobStatus(str, Enum):
+class JobStatus(str, Enum):  # noqa: UP042 -- StrEnum needs 3.11; the harness runs on 3.10 too
     """Terminal states a canary job can reach."""
 
     PROMOTED = "PROMOTED"

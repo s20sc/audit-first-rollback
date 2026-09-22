@@ -7,11 +7,12 @@ Three failure classes, four cells each, two postures:
     third poll, final poll, post-poll compute).
   * Class B (rollback-internal raise): the metric raises and the
     rollback closure itself then raises. B1-B4 vary the exception type
-    (KeyError, RuntimeError, TimeoutError, a cancelled coroutine).
+    (KeyError, RuntimeError, TimeoutError, a cancellation-like error).
   * Class C (audit-write-side raise): a status write raises. C1 fires
     mid-canary, C2 on the success-path write, C3 on the ROLLED_BACK
     write after the closure already reverted live state, C4 is a
-    metric raise concurrent with a second upgrade request.
+    metric raise while a second upgrade request for the same capability
+    arrives during the soak (it must be rejected as busy).
 
 For every cell the *audit-first ideal* terminal outcome is fixed by the
 construction: a trial is consistent iff its (terminal status, live
@@ -35,6 +36,7 @@ import time
 from dataclasses import asdict, dataclass
 
 from src.audit_chain import InMemoryAuditChain
+from src.audit_first import CanaryJob, CapabilityBusy, run_audit_first, run_fail_open
 from src.job_store import Job, JobStore
 from src.rollback_closure import make_rollback_closure
 from src.status import JobStatus
@@ -67,7 +69,7 @@ class Cell:
     trigger: str                # _BODY | _COMPUTE | _SUCCESS_WRITE
     rollback_exc: BaseException | None = None   # Class B
     audit_write_raises: bool = False            # Class C3
-    concurrent_upgrade: bool = False            # Class C4 (annotation only)
+    concurrent_upgrade: bool = False            # Class C4: second request in the soak
     ideal_status: str = ""      # audit-first ideal terminal status
     ideal_live: str = ""        # audit-first ideal live version
 
@@ -126,6 +128,21 @@ class TrialRecord:
     wall_clock_ms: int
     rollback_path_ms: int
     error_text: str
+    concurrent_request: str = ""   # C4: "rejected" | "accepted" | ""
+
+
+class _WriterBackedChain(InMemoryAuditChain):
+    """Audit chain whose terminal append also goes through the mocked
+    status writer, so an armed status-write fault fires on the write the
+    guard performs."""
+
+    def __init__(self, writer: StatusWriter) -> None:
+        super().__init__()
+        self._writer = writer
+
+    def append_terminal(self, job_id: str, status: JobStatus) -> None:
+        self._writer.write(status.value)
+        super().append_terminal(job_id, status)
 
 
 async def run_trial(*, posture: str, cell: Cell, trial_index: int,
@@ -141,8 +158,10 @@ async def run_trial(*, posture: str, cell: Cell, trial_index: int,
     cap = cell.capability
     active = ActiveVersionMap()
     active.promote(cap, PRE_VERSION)
-    audit = InMemoryAuditChain()
     writer = StatusWriter()
+    # Terminal appends go through the status writer, so a cell that arms a
+    # status-write fault (C3) reaches the write the guard actually makes.
+    audit = _WriterBackedChain(writer)
     store = JobStore()
     job_id = f"{cell.name}:{posture}:{trial_index}"
     store.insert(Job(job_id=job_id, capability=cap,
@@ -154,6 +173,8 @@ async def run_trial(*, posture: str, cell: Cell, trial_index: int,
         active.arm_revert_raise(cell.rollback_exc)
     if cell.audit_write_raises:
         writer.arm_raise_on("ROLLED_BACK")
+    if cell.trigger == _SUCCESS_WRITE:
+        writer.arm_raise_on("PROMOTED")
     rb = make_rollback_closure(
         capability=cap, pre_version=PRE_VERSION,
         revert_fn=lambda snap: active.revert(snap.capability, snap.pre_version),
@@ -162,13 +183,30 @@ async def run_trial(*, posture: str, cell: Cell, trial_index: int,
     t0 = time.monotonic()
     rollback_start = 0.0
     error_text = ""
+    concurrent = {"outcome": ""}
 
-    # Provisional flip lives outside the guard.
-    active.promote(cap, TO_VERSION)
+    async def second_request() -> None:
+        # C4: a second upgrade of the same capability arrives while the
+        # first job holds the capability lock. The reference runner must
+        # reject it before touching anything.
+        job2 = f"{job_id}:concurrent"
+        store.insert(Job(job_id=job2, capability=cap,
+                         from_version=PRE_VERSION, to_version="3.0.0"))
+        cjob2 = CanaryJob(job_id=job2, capability=cap,
+                          from_version=PRE_VERSION, to_version="3.0.0")
+        try:
+            await guard(job=cjob2, flip=lambda: active.promote(cap, "3.0.0"),
+                        body=_never, rollback=rb, store=store, audit=audit)
+        except CapabilityBusy:
+            concurrent["outcome"] = "rejected"
+        else:
+            concurrent["outcome"] = "accepted"
 
     # Canary soak: one poll per interval (latency is emergent).
     async def soak() -> None:
         for i in range(cell.polls):
+            if i == 0 and cell.concurrent_upgrade:
+                await second_request()
             if sleep:
                 await asyncio.sleep(POLL_INTERVAL_SECONDS)
             # Class A/B/C1/C3/C4 raise from the metric poll at the last
@@ -178,51 +216,27 @@ async def run_trial(*, posture: str, cell: Cell, trial_index: int,
         if cell.trigger == _COMPUTE:
             raise ComputeRaise(f"{cell.name}: post-poll compute raised")
 
-    def terminal(status: JobStatus) -> None:
-        writer.write(status.value)
-        audit.append_terminal(job_id, status)
-
-    final_status = JobStatus.PROMOTED
-    try:
+    async def body():
         await soak()
-        # Body succeeded. Class C2 fails on the success-path promote write.
-        if cell.trigger == _SUCCESS_WRITE:
-            raise OSError(f"{cell.name}: success-path promote write raised")
-        terminal(JobStatus.PROMOTED)  # genuine success (no grid cell hits this)
-        final_status = JobStatus.PROMOTED
-    except BaseException as exc:  # provisional-region failure
-        error_text = repr(exc)
-        if posture == "fail-open":
-            # Fail-open omits the rollback closure entirely and records
-            # FAILED, leaving live state at the to-version.
-            try:
-                terminal(JobStatus.FAILED)
-            except Exception as w_exc:
-                error_text += f" + write: {w_exc!r}"
-            final_status = JobStatus.FAILED
-        else:
-            # Audit-first: rollback runs before the terminal write.
-            rollback_start = time.monotonic()
-            try:
-                rb.run()
-            except BaseException as rb_exc:
-                # Rollback itself raised (Class B): cannot revert; record
-                # FAILED with the to-version still live, truthfully.
-                error_text += f" + rb: {rb_exc!r}"
-                store_write_failed(writer, audit, job_id)
-                final_status = JobStatus.FAILED
-            else:
-                # Rollback succeeded (live reverted). Write ROLLED_BACK;
-                # if that write itself raises (Class C3), fall back to a
-                # FAILED record with live already at the from-version.
-                try:
-                    terminal(JobStatus.ROLLED_BACK)
-                    final_status = JobStatus.ROLLED_BACK
-                except Exception as w_exc:
-                    error_text += f" + audit-write: {w_exc!r}"
-                    writer.write(JobStatus.FAILED.value)
-                    audit.append_terminal(job_id, JobStatus.FAILED)
-                    final_status = JobStatus.FAILED
+        # The runner writes the PROMOTED terminal after a passed soak; the
+        # Class C2 cell arms that write to raise (see the writer below).
+        return "promoted"
+
+    def flip() -> None:
+        active.promote(cap, TO_VERSION)
+
+    # Both postures run the guard from src/audit_first.py: the grid is a
+    # regression test of the reference implementation, not a second copy
+    # of it. The postures differ only in which entry point is called.
+    guard = run_audit_first if posture == "audit-first" else run_fail_open
+    cjob = CanaryJob(job_id=job_id, capability=cap,
+                     from_version=PRE_VERSION, to_version=TO_VERSION)
+    rollback_start = time.monotonic()
+    await guard(job=cjob, flip=flip, body=body, rollback=rb, store=store,
+                audit=audit)
+    job_now = await store.fetch_or_raise(job_id)
+    final_status = job_now.status
+    error_text = job_now.error or ""
 
     t1 = time.monotonic()
     await store.update(job_id, status=final_status)
@@ -230,7 +244,9 @@ async def run_trial(*, posture: str, cell: Cell, trial_index: int,
     final_live = active.view(cap)
     audit_last = audit.tail(1)[0].status.value if audit.tail(1) else "NONE"
     consistent = (final_status.value == cell.ideal_status
-                  and final_live == cell.ideal_live)
+                  and final_live == cell.ideal_live
+                  and (not cell.concurrent_upgrade
+                       or concurrent["outcome"] == "rejected"))
     wall_ms = max(1, round((t1 - t0) * 1000))
     rb_ms = (max(1, round((t1 - rollback_start) * 1000))
              if rollback_start else 0)
@@ -243,7 +259,12 @@ async def run_trial(*, posture: str, cell: Cell, trial_index: int,
         expected_status=cell.ideal_status, expected_live_value=cell.ideal_live,
         consistent=consistent, audit_chain_last_record=audit_last,
         wall_clock_ms=wall_ms, rollback_path_ms=rb_ms, error_text=error_text,
+        concurrent_request=concurrent["outcome"],
     )
+
+
+async def _never() -> None:
+    raise AssertionError("a rejected second request must not run its body")
 
 
 def store_write_failed(writer: StatusWriter, audit: InMemoryAuditChain,

@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
 """Extract the latency distribution from a chaos-grid run.
 
-    python scripts/run_latency.py
+    python scripts/run_latency.py              # a fresh run in out/
+    python scripts/run_latency.py --root data  # the committed reference run
+    audit-first-latency --root <dir>           # installed wheel
 
-Reads ``data/chaos-grid/raw.jsonl`` (run run_chaos_grid.py first) and
-writes ``data/latency/summary.json`` with per-posture percentiles, the
-per-cell median latency, and the sorted per-posture latency samples that
-back the empirical latency CDF figure in the paper.
+Reads ``<root>/chaos-grid/raw.jsonl`` (run run_chaos_grid.py first; the
+root is taken from the current directory first and from the checkout
+second) and
+writes ``<root>/latency/summary.json`` with per-posture percentiles, the
+per-cell median latency, and the sorted per-posture latency samples of this
+reference model. These are the model's end-to-end times, an illustration of
+the pattern; the paper's Figure 3 and its recovery-path numbers come from
+the production records under ``production/`` and are not produced here.
 
 Latency is wall-clock from the upgrade request to the terminal status
 read. It is emergent from the canary-soak model (one poll interval per
@@ -17,14 +23,23 @@ configuration, not a fitted target.
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
 import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-RAW = REPO_ROOT / "data" / "chaos-grid" / "raw.jsonl"
-OUT_DIR = REPO_ROOT / "data" / "latency"
+
+
+def _root(argv: list[str] | None) -> Path:
+    ap = argparse.ArgumentParser(description="Latency distribution of a chaos-grid run")
+    ap.add_argument("--root", type=Path, default=Path("out"),
+                    help="directory holding chaos-grid/raw.jsonl (default: out)")
+    root = ap.parse_args(argv).root
+    if root.is_absolute() or (root / "chaos-grid" / "raw.jsonl").exists():
+        return root
+    return REPO_ROOT / root
 
 
 def _percentile(values: list[float], q: float) -> float:
@@ -37,6 +52,9 @@ def _percentile(values: list[float], q: float) -> float:
 
 
 def main(argv: list[str] | None = None) -> int:
+    root = _root(argv)
+    RAW = root / "chaos-grid" / "raw.jsonl"
+    OUT_DIR = root / "latency"
     if not RAW.exists():
         print(f"raw trials not found: {RAW}\n"
               f"run: python scripts/run_chaos_grid.py --trials 50",

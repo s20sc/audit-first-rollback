@@ -12,12 +12,16 @@ This module defines:
   * :class:`InMemoryAuditChain` — a reference implementation backed
     by a Python list, suitable for the chaos-grid harness.
 
-Production deployments will substitute a durable append-only store
-(SQLite, Postgres WAL, or a content-addressed object store). The
-:class:`AuditChain` protocol is exactly what the guard needs and
-nothing more; a durable chain may carry additional fields (signer
-public key, content hash, sequence number) without affecting the
-audit-first rule.
+The chain entry here carries only the job id, the terminal status and a
+timestamp. On its own that is not the paper's terminal record: the
+divergence flag, the error text and the rollback reason live in the job
+record of :class:`job_store.JobStore`, and the terminal record of a job
+is the pair (job record, chain entry). A deployment that wants the chain
+alone to be the terminal record has to put the from/to versions and the
+divergence flag into the appended payload; this reference does not.
+A production deployment may back the chain with a durable append-only
+store and add fields (signer, content hash, sequence number) without
+changing the guard.
 """
 
 from __future__ import annotations
@@ -33,9 +37,9 @@ from .status import JobStatus
 class AuditRecord:
     """One row in the audit chain.
 
-    The minimal record carries enough information for the audit-first
-    rule's correctness argument: the job's identity, the terminal
-    status that was finally written, and a monotonic timestamp.
+    The record is deliberately minimal: job id, terminal status and time.
+    It identifies the terminal record; the divergence flag, error text and
+    rollback reason are on the job record (see the module docstring).
     """
 
     job_id: str

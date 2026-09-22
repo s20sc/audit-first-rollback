@@ -3,7 +3,8 @@
 
     python scripts/run_chaos_grid.py --trials 50 --seed 112026
 
-Outputs three files under ``data/chaos-grid/``:
+Outputs three files under ``out/chaos-grid/`` (``--outdir`` to change;
+the committed reference run lives in ``data/chaos-grid/``):
 
   * ``raw.jsonl``     — one record per trial.
   * ``summary.json``  — per-posture and per-cell aggregates with Wilson CIs.
@@ -29,11 +30,15 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from harness.chaos_grid import (  # noqa: E402
-    ALL_CELLS, ALL_POSTURES, CELLS, cell_by_name, run_trial,
+    ALL_CELLS,
+    ALL_POSTURES,
+    CELLS,
+    cell_by_name,
+    run_trial,
     trial_record_to_dict,
 )
 
-DATA_DIR = REPO_ROOT / "data" / "chaos-grid"
+DATA_DIR = REPO_ROOT / "out" / "chaos-grid"
 
 
 def _wilson_ci(k: int, n: int, z: float = 1.96) -> tuple[float, float]:

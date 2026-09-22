@@ -5,7 +5,8 @@
     python reproduce.py --quick    # 12 x 5 x 2 = 120 trials, no soak sleep
 
 Runs the regression tests, the twelve-cell chaos grid, the latency
-extract, and the sign-check, then prints the headline result. The full
+extract, and the sign-check, then prints the headline result. Results go
+to out/; the committed reference run in data/ is never overwritten. The full
 run sleeps each canary poll and takes a few minutes; --quick skips the
 soak sleeps (so latency figures are meaningless but consistency is not).
 """
@@ -54,9 +55,9 @@ def main() -> int:
         return rc
 
     if not args.quick:
-        _run([py, "scripts/run_latency.py"])
+        _run([py, "scripts/run_latency.py", "--root", "out"])
 
-    return _run([py, "scripts/sign_check.py"])
+    return _run([py, "scripts/sign_check.py", "out/chaos-grid/summary.json"])
 
 
 if __name__ == "__main__":

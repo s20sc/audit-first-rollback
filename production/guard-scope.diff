@@ -1,0 +1,122 @@
+diff --git a/bridge/app/aeros/evolution_pipeline.py b/bridge/app/aeros/evolution_pipeline.py
+index 7d24fbe..96b0ef1 100644
+--- a/bridge/app/aeros/evolution_pipeline.py
++++ b/bridge/app/aeros/evolution_pipeline.py
+@@ -117,6 +117,14 @@ class JobStatus(str, Enum):
+         }
+ 
+ 
++class RollbackFailure(RuntimeError):
++    """Raised by the canary guard when the flagged FAILED record could not be
++    written after the rollback closure raised. Its message is the flagged
++    error text, so the job wrapper's fallback record keeps the divergence
++    flag instead of recording an unflagged FAILED with the new version live.
++    """
++
++
+ @dataclass
+ class EvolutionJob:
+     """In-memory job record. Mutated under :class:`EvolutionJobStore` lock."""
+@@ -673,31 +681,38 @@ class EvolutionPipeline:
+         config = self._canary_config
+         canary_start_dt = datetime.now(UTC)
+         canary_started_at = canary_start_dt.isoformat()
+-        self._promote(job.capability, job.to_version, job.from_version)
+-        await self._store.update(
+-            job.job_id,
+-            status=JobStatus.CANARY_RUNNING,
+-            current_stage="canary_running",
+-            canary_started_at=canary_started_at,
+-            canary_window_seconds=config.window_seconds,
+-            append_audit=(
+-                f"canary_running: provisional promote {job.from_version}"
+-                f" → {job.to_version}, soak {config.window_seconds:g}s"
+-                f", poll every {config.poll_interval_seconds:g}s"
+-            ),
+-        )
+-        logger.info(
+-            "EvolutionPipeline: %s canary_running (window=%.1fs poll=%.1fs)",
+-            job.capability,
+-            config.window_seconds,
+-            config.poll_interval_seconds,
+-        )
+ 
+         # _metrics_provider is non-None when _should_run_canary returned True.
+         assert self._metrics_provider is not None
+         assert self._rollback is not None
+ 
++        # The guard starts at the provisional flip itself. The flip mutates
++        # live state before it writes its own audit row, and the canary
++        # entry record is written after the flip; a failure at either point
++        # would otherwise leave the new version live under a FAILED record.
++        # The rollback closure restores the snapshot captured before the
++        # flip and is idempotent, so wrapping the flip is safe even when the
++        # failure happens before the live assignment lands.
+         try:
++            self._promote(job.capability, job.to_version, job.from_version)
++            await self._store.update(
++                job.job_id,
++                status=JobStatus.CANARY_RUNNING,
++                current_stage="canary_running",
++                canary_started_at=canary_started_at,
++                canary_window_seconds=config.window_seconds,
++                append_audit=(
++                    f"canary_running: provisional promote {job.from_version}"
++                    f" → {job.to_version}, soak {config.window_seconds:g}s"
++                    f", poll every {config.poll_interval_seconds:g}s"
++                ),
++            )
++            logger.info(
++                "EvolutionPipeline: %s canary_running (window=%.1fs poll=%.1fs)",
++                job.capability,
++                config.window_seconds,
++                config.poll_interval_seconds,
++            )
+             return await self._run_canary_body(job, canary_start_dt)
+         except Exception as exc:  # noqa: BLE001 — fail-open guard
+             logger.exception(
+@@ -720,20 +735,31 @@ class EvolutionPipeline:
+                     " inconsistent",
+                     rb_exc,
+                 )
+-                await self._store.update(
+-                    job.job_id,
+-                    status=JobStatus.FAILED,
+-                    current_stage="failed",
+-                    error=(
+-                        f"canary crash + rollback failure: "
+-                        f"{type(exc).__name__}: {exc}; "
+-                        f"rollback raised {type(rb_exc).__name__}: {rb_exc}"
+-                    ),
+-                    append_audit=(
+-                        f"crashed and rollback failed: {type(exc).__name__};"
+-                        f" active version may be inconsistent"
+-                    ),
++                flagged_error = (
++                    f"canary crash + rollback failure: "
++                    f"{type(exc).__name__}: {exc}; "
++                    f"rollback raised {type(rb_exc).__name__}: {rb_exc}"
+                 )
++                try:
++                    await self._store.update(
++                        job.job_id,
++                        status=JobStatus.FAILED,
++                        current_stage="failed",
++                        error=flagged_error,
++                        append_audit=(
++                            f"crashed and rollback failed: {type(exc).__name__};"
++                            f" active version may be inconsistent"
++                        ),
++                    )
++                except Exception as w_exc:  # noqa: BLE001 — keep the flag
++                    # The flagged record did not land. Escape with the flag
++                    # in the message so the top-level wrapper's fallback
++                    # FAILED record still says the live version may be
++                    # inconsistent.
++                    raise RollbackFailure(
++                        f"{flagged_error}; flagged write raised "
++                        f"{type(w_exc).__name__}: {w_exc}"
++                    ) from w_exc
+                 return await self._fetch_or_raise(job.job_id)
+             await self._store.update(
+                 job.job_id,

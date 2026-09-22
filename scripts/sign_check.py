@@ -1,27 +1,43 @@
 #!/usr/bin/env python3
 """Re-verify the shipped chaos-grid summary against four hypotheses.
 
-    python scripts/sign_check.py
+    python scripts/sign_check.py                       # the committed run
+    python scripts/sign_check.py out/chaos-grid/summary.json
+    audit-first-sign-check <dir>/chaos-grid/summary.json   # installed wheel
 
-Loads ``data/chaos-grid/summary.json`` (produced by run_chaos_grid.py)
-and re-checks:
+Loads a chaos-grid ``summary.json`` (produced by run_chaos_grid.py); the
+default is the committed run, ``data/chaos-grid/summary.json``, looked up
+under the current directory and then under the checkout. It re-checks:
 
   H1  audit-first is consistent in every cell,
   H2  fail-open is consistent in every Class-B cell,
   H3  fail-open is inconsistent in every Class-A and Class-C cell,
-  H4  audit-first wall-clock p95 is within the 500 ms recovery budget.
+  H4  audit-first wall-clock p95 of the reference model is under a 500 ms
+      smoke threshold. This is the model's end-to-end time, not the
+      manuscript's production recovery-path objective, which
+      production/analysis/analyze.py evaluates from the production records.
 
 Exits non-zero if any check fails.
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-SUMMARY = REPO_ROOT / "data" / "chaos-grid" / "summary.json"
+SUMMARY = Path("data") / "chaos-grid" / "summary.json"
+
+
+def _resolve(path: Path) -> Path:
+    """An explicit or default relative path is taken from the current
+    directory first and from the checkout second, so the installed command
+    works outside the checkout with an explicit path."""
+    if path.is_absolute() or path.exists():
+        return path
+    return REPO_ROOT / path
 
 CLASS_B = ["B1", "B2", "B3", "B4"]
 CLASS_AC = ["A1", "A2", "A3", "A4", "C1", "C2", "C3", "C4"]
@@ -30,7 +46,10 @@ ALL_CELLS = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4",
 
 
 def main(argv: list[str] | None = None) -> int:
-    path = Path(argv[0]) if argv else SUMMARY
+    ap = argparse.ArgumentParser(description="Re-verify a chaos-grid summary against H1-H4")
+    ap.add_argument("summary", nargs="?", type=Path, default=SUMMARY,
+                    help="chaos-grid summary.json (default: the committed run)")
+    path = _resolve(ap.parse_args(argv).summary)
     if not path.exists():
         print(f"summary not found: {path}\n"
               f"run: python scripts/run_chaos_grid.py --trials 50",
